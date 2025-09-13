@@ -44,17 +44,18 @@ specs:
   - ripser>=0.6.12
   - svgpathtools
   
-  # Install SCLab and SCLab-App via pip
-  - pip:
-    - sclab>=0.3.0
-    - scikit-misc>=0.5.1
-    - scrublet>=0.2.3
-    - typer>=0.9.0
-    # Install this project from a locally built wheel
-    - dist/sclab_app-0.1.0-py3-none-any.whl
 
 # Installer customization
 installer_filename: SCLab-App-{{ version }}-{{ platform }}
+
+# Pip packages to install into the constructed environment
+pip:
+  - sclab>=0.3.0
+  - scikit-misc>=0.5.1
+  - scrublet>=0.2.3
+  - typer>=0.9.0
+  # Install this project from a locally built wheel
+  - dist/sclab_app-0.1.0-py3-none-any.whl
 
 # Welcome screen
 welcome_text: |
