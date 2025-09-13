@@ -8,6 +8,7 @@ import sys
 import platform
 import shutil
 from pathlib import Path
+import subprocess
 
 
 def create_launcher_scripts():
@@ -22,6 +23,44 @@ def create_launcher_scripts():
         create_macos_launchers()
     else:
         create_linux_launchers()
+
+
+def install_python_packages():
+    """Install pip-only dependencies and the bundled sclab-app wheel.
+
+    Looks for the wheel under $PREFIX/share/sclab-app/wheels/ created by Constructor's extra_files.
+    Also installs pip-only dependencies that are not reliably available on conda across platforms.
+    """
+    wheel_dir = Path(sys.prefix) / "share" / "sclab-app" / "wheels"
+    packages = [
+        # Pip-only or better served from PyPI for consistency
+        "scikit-misc>=0.5.1",
+        "scrublet>=0.2.3",
+        "typer>=0.9.0",
+    ]
+
+    print("Installing Python packages with pip (post-install)...")
+    # Install our application wheel first if present
+    if wheel_dir.exists():
+        wheels = sorted(wheel_dir.glob("sclab_app-*.whl"))
+        if wheels:
+            wheel_path = wheels[0]
+            try:
+                print(f"Installing bundled wheel: {wheel_path.name}")
+                subprocess.run([sys.executable, "-m", "pip", "install", "--no-input", str(wheel_path)], check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Warning: Failed to install wheel {wheel_path.name}: {e}")
+        else:
+            print("No sclab-app wheel found in wheels directory; skipping wheel install.")
+    else:
+        print(f"Wheel directory not found: {wheel_dir}")
+
+    # Install additional pip packages
+    try:
+        print(f"Installing pip packages: {', '.join(packages)}")
+        subprocess.run([sys.executable, "-m", "pip", "install", "--no-input", *packages], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Warning: Failed to install some pip packages: {e}")
 
 
 def create_windows_launchers():
@@ -349,6 +388,9 @@ def main():
     print()
     
     try:
+        # Install Python packages (wheel + pip deps)
+        install_python_packages()
+        
         # Create launcher scripts
         create_launcher_scripts()
         
