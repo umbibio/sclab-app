@@ -1,6 +1,7 @@
 # SCLab-App Constructor Configuration
 name: SCLab-App
 version: 0.1.0
+license_file: LICENSE.txt
 
 channels:
   - conda-forge
@@ -67,7 +68,9 @@ extra_files:
   - dist/sclab_app-0.1.0-py3-none-any.whl
 
 # Installation options
-default_prefix: "{{ home }}/Documents/SCLab-App"
+# Use a Windows-safe default prefix (no spaces) to avoid NSIS ExpandEnvStrings tokenization issues.
+# On Unix-like systems, constructor will still resolve this to a sensible path.
+default_prefix: "%USERPROFILE%\\SCLabApp"
 register_python: false
 initialize_by_default: false
 
