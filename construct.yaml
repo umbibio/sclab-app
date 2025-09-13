@@ -71,9 +71,6 @@ welcome_text: |
   
   Default analysis notebooks will be created in your Documents folder.
 
-# License
-license_file: LICENSE.txt
-
 # Post-install script to set up launchers and notebooks
 post_install: scripts/setup_sclab_app.py
 
