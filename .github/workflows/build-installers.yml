@@ -27,17 +27,19 @@ jobs:
           channels: conda-forge,bioconda
           python-version: "3.12"
 
-      - name: Install constructor + flit (Linux/macOS)
+      - name: Install constructor 3.12 + flit (Linux/macOS)
         if: runner.os != 'Windows'
         shell: bash -l {0}
         run: |
-          conda install -y -c conda-forge constructor flit
+          conda install -y -c conda-forge "constructor=3.12.*" flit
+          constructor --version
 
-      - name: Install constructor + flit + nsis (Windows)
+      - name: Install constructor 3.12 + flit + nsis (Windows)
         if: runner.os == 'Windows'
         shell: bash -l {0}
         run: |
-          conda install -y -c conda-forge constructor nsis flit
+          conda install -y -c conda-forge "constructor=3.12.*" nsis flit
+          constructor --version
 
       - name: Build wheel with Flit
         shell: bash -l {0}

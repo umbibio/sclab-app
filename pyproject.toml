@@ -50,8 +50,4 @@ dev = [
 requires = ["flit_core>=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.package]
-# Include resource files (notebooks, assets, etc.) packaged under src/sclab_app/resources/
-include = [
-    "resources/**",
-]
+
