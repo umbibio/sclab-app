@@ -1,0 +1,51 @@
+[project]
+name = "sclab-app"
+version = "0.1.0"
+description = "SCLab-App: Interactive single-cell analysis application"
+readme = "README.md"
+authors = [
+    { name = "Argenis Arriojas", email = "ArriojasMaldonado001@umb.edu" },
+]
+requires-python = ">=3.10,<3.13"
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+dependencies = [
+    "sclab>=0.3.0",
+    "jupyterlab>=4.3.6",
+    "voila>=0.5",
+    "ipywidgets",
+    "notebook",
+    "typer>=0.9.0",
+]
+
+[project.urls]
+"Repository" = "https://github.com/umbibio/sclab-app.git"
+"Documentation" = "https://github.com/umbibio/sclab-app/docs"
+"Homepage" = "https://github.com/umbibio/sclab-app"
+"Bug Tracker" = "https://github.com/umbibio/sclab-app/issues"
+
+[project.scripts]
+sclab-app = "sclab_app.cli:main_entry"
+sclab-app-dashboard = "sclab_app.cli:dashboard_entry"
+sclab-app-server = "sclab_app.cli:server_entry"
+
+[project.optional-dependencies]
+dev = [
+    "bump-my-version>=0.31.1",
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.4",
+    "pytest>=8.3.4",
+]
+
+[build-system]
+requires = ["flit_core>=3.2,<4"]
+build-backend = "flit_core.buildapi"

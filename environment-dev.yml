@@ -1,0 +1,55 @@
+# Development environment for SCLab-App
+# Mirrors Constructor as closely as possible for parity during development
+name: sclab-app-dev
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  # Python runtime
+  - python=3.12
+  - pip
+
+  # Core scientific computing
+  - numpy<2.2
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - tqdm
+  - requests
+
+  # Single-cell specific
+  - anndata
+  - scanpy
+  - h5py
+  - leidenalg
+  - igraph
+  - python-igraph
+
+  # Jupyter ecosystem
+  - jupyterlab>=4.3.6
+  - ipywidgets
+  - voila>=0.5
+  - nodejs
+
+  # Visualization
+  - plotly<6.0
+  - itables<2.4
+
+  # Additional dependencies
+  - anywidget
+  - ripser>=0.6.12
+  - svgpathtools
+
+  # Developer tooling (optional but recommended for contributors)
+  - pre-commit>=4.1.0
+  - ruff>=0.9.4
+  - pytest>=8.3.4
+
+  # Pip layer (keep in sync with pyproject for runtime deps)
+  - pip:
+      - sclab>=0.3.0
+      - scikit-misc>=0.5.1
+      - scrublet>=0.2.3
+      - typer>=0.9.0
+      - -e .

@@ -1,0 +1,64 @@
+[tool.bumpversion]
+current_version = "0.1.0"
+parse = """(?x)
+    (?P<major>\\d+)\\.
+    (?P<minor>\\d+)\\.
+    (?P<patch>\\d+)
+    (?:
+        .                             # dash separator for pre-release section
+        (?P<pre_l>[a-zA-Z-]+)         # pre-release label (dev, rc, etc.)
+        (?P<pre_n>\\d+)               # pre-release version number
+    )?                                # pre-release section is optional
+"""
+serialize = [
+    "{major}.{minor}.{patch}.{pre_l}{pre_n}",
+    "{major}.{minor}.{patch}",
+]
+search = "{current_version}"
+replace = "{new_version}"
+regex = false
+ignore_missing_version = false
+ignore_missing_files = false
+tag = true
+sign_tags = true
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+allow_dirty = false
+commit = true
+message = "chore: Bump version: {current_version} → {new_version}"
+commit_args = ""
+
+[tool.bumpversion.parts.pre_l]
+values = ["dev", "final"]
+optional_value = "final"
+
+[tool.bumpversion.parts.pre_n]
+first_value = "0"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "src/sclab_app/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "LICENSE.txt"
+search = "Copyright \\(c\\) \\d{{4}}"
+replace = "Copyright (c) {now:%Y}"
+regex = true
+
+# Update construct.yaml version field
+[[tool.bumpversion.files]]
+filename = "construct.yaml"
+search = 'version: {current_version}'
+replace = 'version: {new_version}'
+
+# Update wheel path in construct.yaml pip section
+[[tool.bumpversion.files]]
+filename = "construct.yaml"
+search = 'dist/sclab_app-{current_version}-py3-none-any.whl'
+replace = 'dist/sclab_app-{new_version}-py3-none-any.whl'
