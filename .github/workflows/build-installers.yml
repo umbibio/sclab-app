@@ -10,6 +10,8 @@ jobs:
   build:
     name: Build (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    env:
+      CONDA_PROGRESS_BAR: off
     strategy:
       fail-fast: false
       matrix:
