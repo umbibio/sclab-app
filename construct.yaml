@@ -42,9 +42,6 @@ specs:
   - ripser>=0.6.12
   - svgpathtools
 
-# Installer customization
-installer_filename: SCLab-App-{{ version }}-{{ platform }}
-
 # Welcome screen
 welcome_text: |
   Welcome to SCLab-App!
