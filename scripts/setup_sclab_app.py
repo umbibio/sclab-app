@@ -9,6 +9,7 @@ import platform
 import shutil
 from pathlib import Path
 import subprocess
+import importlib.resources as pkg_resources
 
 
 def create_launcher_scripts():
@@ -61,6 +62,44 @@ def install_python_packages():
         subprocess.run([sys.executable, "-m", "pip", "install", "--no-input", *packages], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Warning: Failed to install some pip packages: {e}")
+
+
+def copy_packaged_resources():
+    """Copy packaged resources (assets, notebooks) from the installed wheel.
+
+    We include resources under `sclab_app/resources/` in the wheel. This copies
+    those into the end-user's installation prefix and Documents folder.
+    """
+    try:
+        # Copy assets into $PREFIX/share/sclab-app/assets
+        target_assets = Path(sys.prefix) / "share" / "sclab-app" / "assets"
+        target_assets.mkdir(parents=True, exist_ok=True)
+        try:
+            with pkg_resources.as_file(pkg_resources.files("sclab_app").joinpath("resources/assets")) as assets_dir:
+                if assets_dir.exists():
+                    print(f"Copying packaged assets to: {target_assets}")
+                    shutil.copytree(assets_dir, target_assets, dirs_exist_ok=True)
+        except FileNotFoundError:
+            pass
+
+        # Copy notebooks into ~/Documents/SCLab-App if they don't exist yet
+        docs_home = Path.home() / "Documents" / "SCLab-App"
+        docs_home.mkdir(parents=True, exist_ok=True)
+        try:
+            with pkg_resources.as_file(pkg_resources.files("sclab_app").joinpath("resources/notebooks")) as nb_dir:
+                if nb_dir.exists():
+                    print(f"Seeding notebooks from packaged resources into: {docs_home}")
+                    for item in nb_dir.iterdir():
+                        dest = docs_home / item.name
+                        if item.is_dir():
+                            shutil.copytree(item, dest, dirs_exist_ok=True)
+                        else:
+                            if not dest.exists():
+                                shutil.copy2(item, dest)
+        except FileNotFoundError:
+            pass
+    except Exception as e:
+        print(f"Warning: Failed to copy packaged resources: {e}")
 
 
 def create_windows_launchers():
@@ -391,6 +430,9 @@ def main():
         # Install Python packages (wheel + pip deps)
         install_python_packages()
         
+        # Copy packaged resources (assets, notebooks)
+        copy_packaged_resources()
+
         # Create launcher scripts
         create_launcher_scripts()
         

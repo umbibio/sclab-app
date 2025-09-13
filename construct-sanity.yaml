@@ -1,0 +1,8 @@
+name: SCLab-App
+version: 0.1.0
+channels:
+  - conda-forge
+specs:
+  - python=3.12
+  - jupyterlab>=4.3.6
+installer_filename: SCLab-App-{{ version }}-{{ platform }}

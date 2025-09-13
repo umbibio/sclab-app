@@ -1,7 +1,6 @@
 # SCLab-App Constructor Configuration
 name: SCLab-App
 version: 0.1.0
-license_file: LICENSE.txt
 
 channels:
   - conda-forge
@@ -65,22 +64,14 @@ post_install: scripts/setup_sclab_app.py
 
 # Include default notebooks and assets
 extra_files:
-  - src: notebooks/
-    dst: share/sclab-app/notebooks/
-  - src: assets/
-    dst: share/sclab-app/assets/
-  - src: dist/sclab_app-0.1.0-py3-none-any.whl
-    dst: share/sclab-app/wheels/
+  - dist/sclab_app-0.1.0-py3-none-any.whl
 
 # Installation options
 default_prefix: "{{ home }}/Documents/SCLab-App"
 register_python: false
 initialize_by_default: false
-create_shortcuts: true
-add_to_path: false
 
 # Batch/silent installation support
 batch_mode: false
 
-# Don't pin package versions too strictly for flexibility
-update_dependencies: true
+ 
