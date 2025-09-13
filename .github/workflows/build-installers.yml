@@ -10,8 +10,6 @@ jobs:
   build:
     name: Build (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-    env:
-      CONDA_PROGRESS_BAR: off
     strategy:
       fail-fast: false
       matrix:
@@ -33,14 +31,14 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash -l {0}
         run: |
-          conda install -y -c conda-forge "constructor=3.12.*" flit
+          conda install --no-progress -y -c conda-forge "constructor=3.12.*" flit
           constructor --version
 
       - name: Install constructor 3.12 + flit + nsis (Windows)
         if: runner.os == 'Windows'
         shell: bash -l {0}
         run: |
-          conda install -y -c conda-forge "constructor=3.12.*" nsis flit
+          conda install --no-progress -y -c conda-forge "constructor=3.12.*" nsis flit
           constructor --version
 
       - name: Build wheel with Flit
