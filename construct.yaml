@@ -63,6 +63,9 @@ welcome_text: |
 post_install: scripts/post_install.sh  # [unix]
 post_install: scripts/post_install.bat  # [win]
 
+# Pre-uninstall cleanup (Windows): remove Start Menu shortcuts
+pre_uninstall: scripts/pre_uninstall.bat  # [win]
+
 # Include default notebooks and assets
 extra_files:
   - dist/sclab_app-0.1.0-py3-none-any.whl

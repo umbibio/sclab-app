@@ -6,6 +6,7 @@ Creates cross-platform launchers and sets up default notebooks.
 
 import sys
 import platform
+import os
 import shutil
 from pathlib import Path
 import subprocess
@@ -149,6 +150,57 @@ start /min cmd /c "timeout /t 3 /nobreak >nul && start http://localhost:8899/lab
 
 pause
 ''', encoding='utf-8')
+
+    # Also create Start Menu shortcuts for easy access
+    try:
+        create_windows_shortcuts(scripts_dir)
+    except Exception as e:
+        print(f"Warning: Failed to create Windows Start Menu shortcuts: {e}")
+
+
+def create_windows_shortcuts(scripts_dir: Path):
+    """Create Start Menu shortcuts pointing to our .bat launchers (per-user).
+
+    Shortcuts are created under:
+      %APPDATA%/Microsoft/Windows/Start Menu/Programs/SCLab-App
+    """
+    appdata = os.environ.get("APPDATA")
+    if not appdata:
+        raise RuntimeError("APPDATA environment variable not set; cannot create Start Menu shortcuts.")
+
+    start_menu_dir = Path(appdata) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "SCLab-App"
+    start_menu_dir.mkdir(parents=True, exist_ok=True)
+
+    shortcuts = [
+        ("SCLab-App.lnk", scripts_dir / "sclab-app.bat"),
+        ("SCLab-App Dashboard.lnk", scripts_dir / "sclab-app-dashboard.bat"),
+        ("SCLab-App Server.lnk", scripts_dir / "sclab-app-server.bat"),
+    ]
+
+    # Working directory for the app
+    sclab_home = Path.home() / "Documents" / "SCLab-App"
+    sclab_home.mkdir(parents=True, exist_ok=True)
+
+    for link_name, target_bat in shortcuts:
+        link_path = start_menu_dir / link_name
+        # Precompute POSIX-like path strings to avoid backslash escapes in f-strings (Py3.10 compatible)
+        link_str = str(link_path).replace('\\', '/')
+        target_str = str(target_bat).replace('\\', '/')
+        workdir_str = str(sclab_home).replace('\\', '/')
+        icon_str = target_str + ",0"
+
+        ps = (
+            "$ws = New-Object -ComObject WScript.Shell; "
+            "$s = $ws.CreateShortcut('{link}'); "
+            "$s.TargetPath = '{target}'; "
+            "$s.WorkingDirectory = '{workdir}'; "
+            "$s.IconLocation = '{icon}'; "
+            "$s.Save();"
+        ).format(link=link_str, target=target_str, workdir=workdir_str, icon=icon_str)
+        # Execute PowerShell to create the shortcut
+        subprocess.run([
+            "powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps
+        ], check=False)
     
     # Dashboard launcher (Voila)
     dashboard_bat = scripts_dir / "sclab-app-dashboard.bat"
