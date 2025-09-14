@@ -16,6 +16,7 @@ specs:
   - pandas
   - matplotlib
   - scikit-learn
+  - scikit-image
   - tqdm
   - requests
 
@@ -26,6 +27,7 @@ specs:
   - igraph
   - python-igraph
   - leidenalg
+  - python-annoy
 
   # Jupyter ecosystem
   - jupyterlab>=4.3.6
@@ -58,16 +60,15 @@ welcome_text: |
   Default analysis notebooks will be created in your Documents folder.
 
 # Post-install script to set up launchers and notebooks
-post_install: scripts/setup_sclab_app.py
+post_install: scripts/post_install.sh  # [unix]
+post_install: scripts/post_install.bat  # [win]
 
 # Include default notebooks and assets
 extra_files:
   - dist/sclab_app-0.1.0-py3-none-any.whl
+  - scripts/setup_sclab_app.py
 
 # Installation options
-# Use a Windows-safe default prefix (no spaces) to avoid NSIS ExpandEnvStrings tokenization issues.
-# On Unix-like systems, constructor will still resolve this to a sensible path.
-default_prefix: "%USERPROFILE%\\SCLabApp"
 register_python: false
 initialize_by_default: false
 

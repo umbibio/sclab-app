@@ -33,6 +33,16 @@ def install_python_packages():
     Also installs pip-only dependencies that are not reliably available on conda across platforms.
     """
     wheel_dir = Path(sys.prefix) / "share" / "sclab-app" / "wheels"
+    # Candidate locations where constructor may have placed the wheel
+    script_dir = Path(__file__).resolve().parent
+    wheel_search_dirs = [
+        wheel_dir,
+        Path(sys.prefix) / "dist",
+        Path(sys.prefix),
+        script_dir,                # e.g., scripts/ alongside this file
+        script_dir.parent,         # repo-style layout fallback
+    ]
+
     packages = [
         # Pip-only or better served from PyPI for consistency
         "scikit-misc>=0.5.1",
@@ -42,19 +52,28 @@ def install_python_packages():
 
     print("Installing Python packages with pip (post-install)...")
     # Install our application wheel first if present
-    if wheel_dir.exists():
-        wheels = sorted(wheel_dir.glob("sclab_app-*.whl"))
-        if wheels:
-            wheel_path = wheels[0]
-            try:
-                print(f"Installing bundled wheel: {wheel_path.name}")
-                subprocess.run([sys.executable, "-m", "pip", "install", "--no-input", str(wheel_path)], check=True)
-            except subprocess.CalledProcessError as e:
-                print(f"Warning: Failed to install wheel {wheel_path.name}: {e}")
-        else:
-            print("No sclab-app wheel found in wheels directory; skipping wheel install.")
+    wheel_path = None
+    for d in wheel_search_dirs:
+        try:
+            if d.exists():
+                candidates = sorted(d.glob("sclab_app-*.whl"))
+                if candidates:
+                    wheel_path = candidates[0]
+                    break
+        except Exception:
+            # Ignore any permission or glob errors and continue to next dir
+            pass
+
+    if wheel_path is not None:
+        try:
+            print(f"Installing bundled wheel from: {wheel_path}")
+            subprocess.run([sys.executable, "-m", "pip", "install", "--no-input", str(wheel_path)], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Warning: Failed to install wheel {wheel_path.name}: {e}")
     else:
-        print(f"Wheel directory not found: {wheel_dir}")
+        print(
+            "No bundled sclab-app wheel found in expected locations; proceeding to install pip-only deps."
+        )
 
     # Install additional pip packages
     try:
