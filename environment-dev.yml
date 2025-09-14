@@ -15,6 +15,7 @@ dependencies:
   - pandas
   - matplotlib
   - scikit-learn
+  - scikit-image
   - tqdm
   - requests
 
@@ -22,9 +23,11 @@ dependencies:
   - anndata
   - scanpy
   - h5py
-  - leidenalg
   - igraph
   - python-igraph
+  - leidenalg
+  - python-annoy
+  - bbknn
 
   # Jupyter ecosystem
   - jupyterlab>=4.3.6

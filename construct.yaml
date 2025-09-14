@@ -7,42 +7,7 @@ channels:
   - conda-forge
   - bioconda
 
-specs:
-  # Base Python environment
-  - python=3.12
-
-  # Core scientific computing
-  - numpy<2.2
-  - pandas
-  - matplotlib
-  - scikit-learn
-  - scikit-image
-  - tqdm
-  - requests
-
-  # Single-cell specific
-  - anndata
-  - scanpy
-  - h5py
-  - igraph
-  - python-igraph
-  - leidenalg
-  - python-annoy
-
-  # Jupyter ecosystem
-  - jupyterlab>=4.3.6
-  - ipywidgets
-  - voila>=0.5
-  - nodejs
-
-  # Visualization
-  - plotly<6.0
-  - itables<2.4
-
-  # Additional dependencies
-  - anywidget
-  - ripser>=0.6.12
-  - svgpathtools
+environment_file: environment-dev.yml
 
 # Welcome screen
 welcome_text: |
@@ -77,5 +42,3 @@ initialize_by_default: false
 
 # Batch/silent installation support
 batch_mode: false
-
- 
