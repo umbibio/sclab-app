@@ -1,0 +1,132 @@
+{
+    "menu_name": "SCLab-App",
+    "menu_items": [
+        {
+            "name": "SCLab-App",
+            "description": "Interactive single-cell analysis toolkit with JupyterLab",
+            "command": [
+                "{{ PYTHON }}",
+                "-m",
+                "sclab_app.cli",
+                "main",
+                "--open-delay",
+                "3"
+            ],
+            "working_dir": "{{ HOME }}/Documents/SCLab-App",
+            "activate": true,
+            "terminal": true,
+            "platforms": {
+                "win": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.ico",
+                    "desktop": false,
+                    "app_user_model_id": "UMBibio.SCLabApp.Main"
+                },
+                "linux": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app_256x256.png",
+                    "Categories": [
+                        "Science",
+                        "Education",
+                        "Development"
+                    ],
+                    "Keywords": [
+                        "single-cell",
+                        "bioinformatics",
+                        "jupyter",
+                        "analysis"
+                    ],
+                    "GenericName": "Single-Cell Analysis Lab",
+                    "StartupNotify": true
+                },
+                "osx": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.icns",
+                    "CFBundleIdentifier": "org.umbibio.sclab-app.main",
+                    "CFBundleDisplayName": "SCLab-App",
+                    "LSApplicationCategoryType": "public.app-category.education"
+                }
+            }
+        },
+        {
+            "name": "SCLab-App Dashboard",
+            "description": "Streamlined dashboard interface for single-cell analysis",
+            "command": [
+                "{{ PYTHON }}",
+                "-m",
+                "sclab_app.cli",
+                "dashboard",
+                "--open-delay",
+                "4"
+            ],
+            "working_dir": "{{ HOME }}/Documents/SCLab-App",
+            "activate": true,
+            "terminal": true,
+            "platforms": {
+                "win": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.ico",
+                    "desktop": false,
+                    "app_user_model_id": "UMBibio.SCLabApp.Dashboard"
+                },
+                "linux": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app_256x256.png",
+                    "Categories": [
+                        "Science",
+                        "Education"
+                    ],
+                    "Keywords": [
+                        "single-cell",
+                        "dashboard",
+                        "analysis"
+                    ],
+                    "GenericName": "SCLab Dashboard",
+                    "StartupNotify": true
+                },
+                "osx": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.icns",
+                    "CFBundleIdentifier": "org.umbibio.sclab-app.dashboard",
+                    "CFBundleDisplayName": "SCLab-App Dashboard",
+                    "LSApplicationCategoryType": "public.app-category.education"
+                }
+            }
+        },
+        {
+            "name": "SCLab-App Server",
+            "description": "Start SCLab-App server without opening browser",
+            "command": [
+                "{{ PYTHON }}",
+                "-m",
+                "sclab_app.cli",
+                "server"
+            ],
+            "working_dir": "{{ HOME }}/Documents/SCLab-App",
+            "activate": true,
+            "terminal": true,
+            "platforms": {
+                "win": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.ico",
+                    "desktop": false,
+                    "app_user_model_id": "UMBibio.SCLabApp.Server"
+                },
+                "linux": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app_256x256.png",
+                    "Categories": [
+                        "Science",
+                        "Development"
+                    ],
+                    "Keywords": [
+                        "single-cell",
+                        "server",
+                        "jupyter"
+                    ],
+                    "GenericName": "SCLab Server",
+                    "StartupNotify": true
+                },
+                "osx": {
+                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.icns",
+                    "CFBundleIdentifier": "org.umbibio.sclab-app.server",
+                    "CFBundleDisplayName": "SCLab-App Server",
+                    "LSApplicationCategoryType": "public.app-category.developer-tools"
+                }
+            }
+        }
+    ],
+    "$schema": "https://schemas.conda.org/menuinst/menuinst-1-1-0.schema.json"
+}

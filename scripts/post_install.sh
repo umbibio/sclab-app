@@ -21,7 +21,6 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Prefer the Python we just installed
 PY_UNIX="$PREFIX/bin/python"
-PY_WIN="$PREFIX/python.exe"   # Not used here; Windows runs a different installer path
 
 {
   echo "==== SCLab-App post_install start ===="
@@ -34,7 +33,7 @@ PY_WIN="$PREFIX/python.exe"   # Not used here; Windows runs a different installe
     echo "Using Python: $PY_UNIX"
     "$PY_UNIX" -c "import sys,platform; print('Python', sys.version); print('Platform', platform.platform())"
     echo "Running setup_sclab_app.py..."
-    "$PY_UNIX" "$PREFIX/setup_sclab_app.py"
+    "$PY_UNIX" "$PREFIX/setup/setup_sclab_app.py"
   else
     echo "ERROR: Python interpreter not found at $PY_UNIX" >&2
     echo "Contents of $PREFIX/bin:" >&2

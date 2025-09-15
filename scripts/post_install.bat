@@ -18,30 +18,19 @@ set SCRIPT_DIR=%~dp0
 if "%SCRIPT_DIR:~-1%"=="\" set SCRIPT_DIR=%SCRIPT_DIR:~0,-1%
 
 set PYWIN=%PREFIX%\python.exe
-set SETUP_PY_PREFIX=%PREFIX%\setup_sclab_app.py
-set SETUP_PY_SCRIPT=%SCRIPT_DIR%\setup_sclab_app.py
+set SETUP_PY_PREFIX=
 
 (
   echo ==== SCLab-App post_install start (Windows) ====
   echo PREFIX=%PREFIX%
   echo SCRIPT_DIR=%SCRIPT_DIR%
   echo PATH=%PATH%
+
   if exist "%PYWIN%" (
     echo Using Python: %PYWIN%
     "%PYWIN%" -c "import sys,platform; print('Python', sys.version); print('Platform', platform.platform())"
     echo Running setup_sclab_app.py...
-    if exist "%SETUP_PY_PREFIX%" (
-      echo Found at %SETUP_PY_PREFIX%
-      "%PYWIN%" "%SETUP_PY_PREFIX%"
-    ) else if exist "%SETUP_PY_SCRIPT%" (
-      echo Found at %SETUP_PY_SCRIPT%
-      "%PYWIN%" "%SETUP_PY_SCRIPT%"
-    ) else (
-      echo ERROR: setup_sclab_app.py not found in PREFIX or script dir.
-      dir "%PREFIX%" 2^>NUL
-      dir "%SCRIPT_DIR%" 2^>NUL
-      exit /b 1
-    )
+    "%PYWIN%" "%PREFIX%\setup\setup_sclab_app.py"
   ) else (
     echo ERROR: Python interpreter not found at %PYWIN%
     dir "%PREFIX%" 2^>NUL

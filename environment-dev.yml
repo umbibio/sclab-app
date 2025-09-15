@@ -28,7 +28,6 @@ dependencies:
   - leidenalg
   - python-annoy
   - bbknn
-  - pyranges
 
   # Jupyter ecosystem
   - jupyterlab>=4.3.6
@@ -50,10 +49,14 @@ dependencies:
   - ruff>=0.9.4
   - pytest>=8.3.4
 
+  # Menuinst for cross-platform shortcuts
+  - menuinst>=2.0
+
   # Pip layer (keep in sync with pyproject for runtime deps)
   - pip:
       - sclab>=0.3.0
       - scikit-misc>=0.5.1
       - scrublet>=0.2.3
       - typer>=0.9.0
+      - pyranges>=0.1.4
       - -e .
