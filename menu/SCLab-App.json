@@ -17,12 +17,12 @@
             "terminal": true,
             "platforms": {
                 "win": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.ico",
+                    "icon": "{{ PREFIX }}/menu/sclab-app.ico",
                     "desktop": false,
                     "app_user_model_id": "UMBibio.SCLabApp.Main"
                 },
                 "linux": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app_256x256.png",
+                    "icon": "{{ PREFIX }}/menu/sclab-app_256x256.png",
                     "Categories": [
                         "Science",
                         "Education",
@@ -38,7 +38,7 @@
                     "StartupNotify": true
                 },
                 "osx": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.icns",
+                    "icon": "{{ PREFIX }}/menu/sclab-app.icns",
                     "CFBundleIdentifier": "org.umbibio.sclab-app.main",
                     "CFBundleDisplayName": "SCLab-App",
                     "LSApplicationCategoryType": "public.app-category.education"
@@ -61,12 +61,12 @@
             "terminal": true,
             "platforms": {
                 "win": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.ico",
+                    "icon": "{{ PREFIX }}/menu/sclab-app.ico",
                     "desktop": false,
                     "app_user_model_id": "UMBibio.SCLabApp.Dashboard"
                 },
                 "linux": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app_256x256.png",
+                    "icon": "{{ PREFIX }}/menu/sclab-app_256x256.png",
                     "Categories": [
                         "Science",
                         "Education"
@@ -80,7 +80,7 @@
                     "StartupNotify": true
                 },
                 "osx": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.icns",
+                    "icon": "{{ PREFIX }}/menu/sclab-app.icns",
                     "CFBundleIdentifier": "org.umbibio.sclab-app.dashboard",
                     "CFBundleDisplayName": "SCLab-App Dashboard",
                     "LSApplicationCategoryType": "public.app-category.education"
@@ -101,12 +101,12 @@
             "terminal": true,
             "platforms": {
                 "win": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.ico",
+                    "icon": "{{ PREFIX }}/menu/sclab-app.ico",
                     "desktop": false,
                     "app_user_model_id": "UMBibio.SCLabApp.Server"
                 },
                 "linux": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app_256x256.png",
+                    "icon": "{{ PREFIX }}/menu/sclab-app_256x256.png",
                     "Categories": [
                         "Science",
                         "Development"
@@ -120,7 +120,7 @@
                     "StartupNotify": true
                 },
                 "osx": {
-                    "icon": "{{ PREFIX }}/share/sclab-app/sclab-app.icns",
+                    "icon": "{{ PREFIX }}/menu/sclab-app.icns",
                     "CFBundleIdentifier": "org.umbibio.sclab-app.server",
                     "CFBundleDisplayName": "SCLab-App Server",
                     "LSApplicationCategoryType": "public.app-category.developer-tools"
