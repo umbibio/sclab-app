@@ -28,6 +28,7 @@ dependencies:
   - leidenalg
   - python-annoy
   - bbknn
+  - pyranges
 
   # Jupyter ecosystem
   - jupyterlab>=4.3.6
