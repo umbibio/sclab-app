@@ -92,11 +92,11 @@ def main(
     display_host = host if host not in ("0.0.0.0", "::") else "localhost"
     typer.echo(f"🌐 Server URL: http://{display_host}:{port}/lab")
     
-    if not no_browser:
-        typer.echo(f"🚀 Opening JupyterLab in your default browser in {open_delay} seconds...")
-        open_browser_delayed(f"http://{display_host}:{port}/lab", delay=open_delay)
-    else:
-        typer.echo(f"📖 Open http://localhost:{port}/lab manually in your browser")
+    # if not no_browser:
+    #     typer.echo(f"🚀 Opening JupyterLab in your default browser in {open_delay} seconds...")
+    #     open_browser_delayed(f"http://{display_host}:{port}/lab", delay=open_delay)
+    # else:
+    #     typer.echo(f"📖 Open http://localhost:{port}/lab manually in your browser")
     
     typer.echo("⏹️  Press Ctrl+C to stop the server")
     typer.echo()
@@ -114,10 +114,10 @@ def main(
         subprocess.run([
             sys.executable, "-m", "jupyterlab",
             f"--notebook-dir={sclab_home}",
-            "--no-browser",
+            # "--no-browser",
             f"--port={port}",
             f"--ServerApp.ip={host}",
-            "--allow-root"
+            # "--allow-root"
         ], check=True)
     except KeyboardInterrupt:
         typer.echo("\n👋 SCLab-App stopped.")
@@ -155,11 +155,11 @@ def dashboard(
         typer.echo("Please ensure the dashboard notebook exists or run SCLab-App first to create default notebooks.", err=True)
         raise typer.Exit(1)
     
-    if not no_browser:
-        typer.echo(f"🚀 Opening dashboard in your default browser in {open_delay} seconds...")
-        open_browser_delayed(f"http://localhost:{port}", delay=open_delay)
-    else:
-        typer.echo(f"📖 Open http://localhost:{port} manually in your browser")
+    # if not no_browser:
+    #     typer.echo(f"🚀 Opening dashboard in your default browser in {open_delay} seconds...")
+    #     open_browser_delayed(f"http://localhost:{port}", delay=open_delay)
+    # else:
+    #     typer.echo(f"📖 Open http://localhost:{port} manually in your browser")
     
     typer.echo("⏹️  Press Ctrl+C to stop the dashboard")
     typer.echo()
@@ -174,7 +174,7 @@ def dashboard(
             str(dashboard_notebook),
             f"--port={port}",
             "--enable_nbextensions=True",
-            "--no-browser"
+            # "--no-browser"
         ], check=True)
     except KeyboardInterrupt:
         typer.echo("\n👋 SCLab-App Dashboard stopped.")
@@ -222,7 +222,7 @@ def server(
         subprocess.run([
             sys.executable, "-m", "jupyterlab",
             f"--notebook-dir={sclab_home}",
-            "--no-browser",
+            # "--no-browser",
             f"--port={port}",
             f"--ServerApp.ip={host}",
             "--allow-root"
