@@ -124,8 +124,8 @@ def create_all_icons():
     """Create all icon formats for all app variants."""
 
     prefix_dir = Path(sys.prefix)
-    menu_dir = prefix_dir / "menu"
-    source_image = menu_dir / "sclab-logo.png"
+    assets_dir = prefix_dir / "assets"
+    source_image = assets_dir / "sclab-logo.png"
 
     logo_variants = [
         ("sclab-app", "SCLab-App Main"),
@@ -138,15 +138,15 @@ def create_all_icons():
 
         if sys.platform == "linux":
             # PNG for Linux
-            create_png_icons(source_image, menu_dir, base_name)
+            create_png_icons(source_image, assets_dir, base_name)
 
         elif sys.platform == "win32":
             # ICO for Windows
-            create_ico_icon(source_image, menu_dir / f"{base_name}.ico")
+            create_ico_icon(source_image, assets_dir / f"{base_name}.ico")
 
         elif sys.platform == "darwin":
             # ICNS for macOS
-            create_icns_icon(source_image, menu_dir / f"{base_name}.icns")
+            create_icns_icon(source_image, assets_dir / f"{base_name}.icns")
 
         else:
             print(f"Error: Unsupported platform: {sys.platform}")
@@ -159,7 +159,7 @@ def install_menu():
     prefix_dir = Path(sys.prefix)
 
     create_all_icons()
-    created_files = install(prefix_dir / "menu" / "sclab-app.json")
+    created_files = install(prefix_dir / "assets" / "sclab-app.json")
     if created_files is not None:
         print("Created files:")
         for file in created_files:
@@ -188,7 +188,6 @@ def install_python_packages():
         "scikit-misc>=0.5.1",
         "scrublet>=0.2.3",
         "typer>=0.9.0",
-        "pyranges>=0.1.4",
     ]
 
     print("Installing Python packages with pip (post-install)...")
