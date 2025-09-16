@@ -52,10 +52,6 @@ dependencies:
   # Menuinst for cross-platform shortcuts
   - menuinst>=2.0
 
-  # Compilation tools
-  - gcc
-  - gxx
-
   # Pip layer (keep in sync with pyproject for runtime deps)
   - pip:
       - sclab>=0.3.0
