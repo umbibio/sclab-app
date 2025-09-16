@@ -58,5 +58,4 @@ dependencies:
       - scikit-misc>=0.5.1
       - scrublet>=0.2.3
       - typer>=0.9.0
-      - pyranges>=0.1.4
       - -e .
