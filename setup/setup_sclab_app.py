@@ -154,12 +154,16 @@ def create_all_icons():
 
 
 def install_menu():
-    from menuinst import install
+    from menuinst.api import install
 
     prefix_dir = Path(sys.prefix)
 
     create_all_icons()
-    install(prefix_dir / "menu" / "sclab-app.json")
+    created_files = install(prefix_dir / "menu" / "sclab-app.json")
+    if created_files is not None:
+        print("Created files:")
+        for file in created_files:
+            print("  ", file)
 
 
 def install_python_packages():

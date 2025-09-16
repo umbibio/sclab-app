@@ -32,8 +32,8 @@ extra_files:
   - dist/sclab_app-0.1.0-py3-none-any.whl: dist/sclab_app-0.1.0-py3-none-any.whl
   - setup/setup_sclab_app.py: setup/setup_sclab_app.py
   - setup/remove_sclab_app.py: setup/remove_sclab_app.py
-  - menu/SCLab-App.png: menu/sclab-logo.png
-  - menu/SCLab-App.json: menu/sclab-app.json
+  - menu/sclab-logo.png: menu/sclab-logo.png
+  - menu/sclab-app.json: menu/sclab-app.json
 
 # Installation options
 register_python: false
