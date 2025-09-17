@@ -70,10 +70,16 @@ jobs:
         with:
           path: ./all_installers
 
+      - name: Flatten installer directory structure
+        run: |
+          mkdir -p ./release_files
+          find ./all_installers -type f -exec cp {} ./release_files/ \;
+          ls -la ./release_files/
+
       - name: Create GitHub Release and upload assets
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            all_installers/**/*
+            release_files/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
