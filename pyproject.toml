@@ -1,6 +1,6 @@
 [project]
 name = "sclab-app"
-version = "0.1.0"
+version = "0.1.1"
 description = "SCLab-App: Interactive single-cell analysis application"
 readme = "README.md"
 authors = [
